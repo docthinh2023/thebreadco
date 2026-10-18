@@ -72,9 +72,8 @@ export const UpdateProductSchema = z.object({
 
 export const UserInfoSchema = z.object({
    userName: z
-  .string()
-  .min(2, { error: 'Name must be at least 2 characters long.' })
-  .trim(),
+   .string()
+   .optional(),
   userAddress: z
   .string()
   .min(1, {error: 'Address is required'})

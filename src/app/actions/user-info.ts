@@ -34,7 +34,8 @@ export async function userInfo(state: UserInfoFormState, formData: FormData): Pr
    const client = await clientPromise;
    const db = client.db('thebreadco');
    if (typeof userId === 'string' && ObjectId.isValid(userId)) {
-   await db.collection('Users').findOneAndUpdate(
+   if(userName){
+     await db.collection('Users').findOneAndUpdate(
     { _id: new ObjectId(userId) },
     {$set: {
       userName: userName,  
@@ -42,6 +43,7 @@ export async function userInfo(state: UserInfoFormState, formData: FormData): Pr
       
     }},
     {upsert:true});
+  } 
     await db.collection('UsersInfo').findOneAndUpdate(
     { userId: userId },
     {$set: {

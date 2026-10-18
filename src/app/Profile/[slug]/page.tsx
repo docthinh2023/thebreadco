@@ -56,7 +56,7 @@ async function getInvoice() {
     const db = client.db('thebreadco')
 
 
-    const result = await db.collection('Invoice').find({ userId : userId }, {projection: {userId: 0, _id: 0, updatedAt: 0}}).toArray()
+    const result = await db.collection('Invoice').find({ userId : userId }, {projection: {userId: 0, _id: 0, updatedAt: 0}}).sort({createdAt: -1}).toArray()
     const Invoice = result.map((invoice) => ({
       ...invoice,
       userItems: invoice.userItems? invoice.userItems : null,

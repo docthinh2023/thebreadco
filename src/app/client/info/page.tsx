@@ -74,7 +74,6 @@ export default function UpdateInfo({initialList}: InfoList) {
         placeholder="Name"
         className="border p-2 bg-amber-100 text-muted"
         name='userName'
-        required
       />
       </div>
       {state?.error?.userName && <p className="text-fg-primary">{state.error.userName}</p>}

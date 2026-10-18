@@ -6,7 +6,7 @@ import type { NextRequest } from 'next/server'
 export async function proxy(request: NextRequest) {
   const session = await verifySession(); 
   const isAuthenticated = !!session?.userId;
-  const isAdmin = session?.role === 'admin';
+  const isAdmin = session?.userRole === 'admin';
   
   const protectedPaths = ['/Profile', '/Checkout', '/client/checkout', '/client/profile'];
   const adminPaths = ['/Profile/AddProduct', '/Profile/UpdateProduct'];  
@@ -31,11 +31,16 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(homeUrl);
   }
 
-  return NextResponse.next();
+
+  if(isAuthenticated && isAdminPath){
+
+    return NextResponse.next();
+  }
+
+
 }
-
-
 // Protect specific routes
 export const config = {
   matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\.png$).*)',],
 }
+

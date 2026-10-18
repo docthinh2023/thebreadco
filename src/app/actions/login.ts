@@ -40,7 +40,6 @@ export async function login(state: LoginFormState, formData: FormData):Promise<L
     
     await createSession(user._id.toString(), user.userRole)
     return {status: 'success', message: 'Signed-in!'}
-  
     }else{return {status:'error', message: 'You are already signed-in'}}
    
   } 
