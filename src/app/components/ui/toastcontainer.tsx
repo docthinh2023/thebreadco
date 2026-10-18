@@ -1,27 +1,24 @@
 "use client";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-interface ToastProviderProps {
-  children: React.ReactNode;
-}
-
-export default function ToastPopup({ children }: ToastProviderProps) {
+export default function ToastProvider({ children }: { children: React.ReactNode }) {
   return (
     <>
       {children}
-      <ToastContainer
+      <ToastContainer 
         position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
+        autoClose={5000}
+        hideProgressBar={true}
         newestOnTop={false}
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="colored"
-        className='w-full md:max-w-4xl text-center flex justify-center'
+        theme="light"
+        className='text-center min-w-xs'
       />
     </>
   );

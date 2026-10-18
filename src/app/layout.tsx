@@ -3,10 +3,9 @@ import { Momo_Trust_Display, Geist } from "next/font/google";
 import {cn} from "cn" 
 import Navbar from "./components/ui/navbar";
 import Footer from "./components/ui/footer";
-import ToastPopup from "./components/ui/toastcontainer";
 import "./globals.css";
-import AuthToastNotifier from "./components/ui/authtoast";
 import { Suspense } from "react";
+import  ToastProvider  from  "../app/components/ui/toastcontainer";
 
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -27,14 +26,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={cn("h-dvh", "antialiased", momoRegular.className, "font-sans", geist.variable)}>
         <body className={cn(`h-full, ${momoRegular.className}, antialiased, pointer-events-auto bg-amber-100 flex flex-col`)}>
+        <ToastProvider>
         <Navbar></Navbar>
-        <ToastPopup>
         <main className="flex-1 h-dvh">{children}</main>
         <Suspense fallback={null}>
-        <AuthToastNotifier/>
         </Suspense>
-        </ToastPopup>
         <Footer></Footer>
+        </ToastProvider>
         </body>
     </html>
   );

@@ -119,6 +119,26 @@ export const InvoiceSchema = z.object({
   totalItems: z.number(),
 });
 
+export const NewsLetterSchema = z.object({
+  userEmail: z.email(),
+  userName: z.string(),
+  userPhone: z.string(),
+  userMessage: z.string(),
+})
+
+export type NewsLetterFormState = |{
+    error?: {
+      userEmail?: string[];
+      userName?: string[];
+      userPhone?: string[];
+      userMessage?: string[]
+    };
+    message?:string;
+    status: 'loading' | 'success' | 'error';
+    
+
+}| undefined
+
 export type InvoiceFormState = {
   error?: {
     userItems?: string[]; 

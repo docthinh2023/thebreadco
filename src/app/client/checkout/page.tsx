@@ -7,6 +7,7 @@ import {Fragment, useActionState, useEffect, useState} from 'react'
 import { toast } from 'react-toastify';
 import {InvoiceFormState} from '@/app/lib/definitions'
 import { CreateInvoice } from '@/app/actions/create-invoice';
+import { redirect } from 'next/navigation';
 
 interface List {
   userName: Name;
@@ -51,6 +52,7 @@ export default function CheckoutPage({initialList}:InfoList) {
       if (state.status === 'success' && state.message) {
         toast.success(state.message);
         clearCart()
+        redirect('/Profile/Invoice')
       } else if (state.status === 'error' && state.message) {
         toast.error(state.message);
       }
@@ -79,22 +81,22 @@ export default function CheckoutPage({initialList}:InfoList) {
           <div className="lg:col-span-7 space-y-8">          
                 {/* Shipping address */}
             <section className="bg-amber-200 p-6 rounded-lg shadow-sm border-6 border-amber-50 hover:shadow-2xl ease-in-out duration-700">
-              <h2 className="text-lg font-medium text-primary mb-4">Shipping Address</h2>
+              <h2 className="text-lg font-medium text-fg-primary mb-4">Shipping Address</h2>
               <div className="grid grid-cols-1 gap-y-4 md:grid-cols-2 gap-x-4">
                 {pressed===true &&
                 <>
                  <div className='flex flex-col'>
-                    <label className="block text-sm font-medium text-muted mb-1">Name</label>
-                    <input type="text" placeholder="Name" className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" name='userName' required/>
+                    <label className="block text-sm font-medium text-primary mb-1">Name</label>
+                    <input type="text" placeholder="Name" className="text-muted w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" name='userName' required/>
                  </div>
                  <div className='flex flex-col'>
-                   <label className="block text-sm font-medium text-muted mb-1">Address</label>
-                   <input placeholder="Address" className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" name='userAddress' required/>
+                   <label className="block text-sm font-medium text-primary mb-1">Address</label>
+                   <input placeholder="Address" className="text-muted w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" name='userAddress' required/>
                  </div>
                  <div className='flex flex-col'>
-                    <label className="block text-sm font-medium text-muted mb-1" >City</label>
+                    <label className="block text-sm font-medium text-primary mb-1" >City</label>
                     <select
-                    className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" name='userCity' required>
+                    className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm text-muted" name='userCity' required text-muted>
                     <option value={''}>Select a city</option>
                     <option value={'Somewhere'}>Somewhere</option>
                     <option value={'Someplace'}>Someplace</option>
@@ -104,27 +106,27 @@ export default function CheckoutPage({initialList}:InfoList) {
                     </select>
                  </div>
                   <div className='flex flex-col'>
-                    <label className="block text-sm font-medium text-muted mb-1" >Postal Code</label>
-                    <input name='userPostalCode'  type='string' placeholder="eg: 70000" className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" required />
+                    <label className="block text-sm font-medium text-primary mb-1" >Postal Code</label>
+                    <input name='userPostalCode'  type='string' placeholder="eg: 70000" className="text-muted w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" required />
                   </div>
                 </>}
                 {pressed===false &&
                 <>
                   <div className='flex flex-col'>
-                    <label className="block text-sm font-medium text-muted mb-1">Name</label>
-                    <p className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm">{userInfo.userName.userName}</p>
+                    <label className="block text-sm font-medium text-primary mb-1">Name</label>
+                    <p className="text-muted w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm">{userInfo.userName.userName}</p>
                   </div>
                   <div className='flex flex-col'>
-                    <label className="block text-sm font-medium text-muted mb-1">Address</label>
-                    <p className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm">{userInfo.userAddress}</p>
+                    <label className="block text-sm font-medium mb-1 text-primary">Address</label>
+                    <p className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm text-muted">{userInfo.userAddress}</p>
                   </div>
                   <div className='flex flex-col'>
-                     <label className="block text-sm font-medium text-muted mb-1">City</label>
-                     <p className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm">{userInfo.userCity}</p>
+                     <label className="block text-sm font-medium text-primary mb-1">City</label>
+                     <p className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm text-muted">{userInfo.userCity}</p>
                   </div>
                   <div className='flex flex-col'>
-                    <label className="block text-sm font-medium text-muted mb-1">Postal Code</label>
-                    <p className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm">{userInfo.userPostalCode}</p>
+                    <label className="block text-sm font-medium text-primary mb-1">Postal Code</label>
+                    <p className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm text-muted">{userInfo.userPostalCode}</p>
                   </div>
                 </>}
                  <div className='mt-4'>
@@ -138,20 +140,20 @@ export default function CheckoutPage({initialList}:InfoList) {
 
               {/* Payment */}
             <section className="bg-amber-200 p-6 rounded-lg shadow-sm border-6 border-amber-50 hover:shadow-2xl ease-in-out duration-700">
-              <h2 className="text-lg font-medium text-primary mb-4">Payment</h2>        
+              <h2 className="text-lg font-medium text-fg-primary mb-4">Payment</h2>        
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="card-number" className="block text-sm font-medium text-muted mb-1">Card number</label>
-                  <input type="text" id="card-number" placeholder="•••• •••• •••• ••••" className="w-full px-3 py-2 border bg-amber-100 border-amber-50 rounded-md shadow-sm sm:text-sm" />
+                  <label htmlFor="card-number" className="block text-sm font-medium text-primary mb-1">Card number</label>
+                  <input type="text" id="card-number" placeholder="•••• •••• •••• ••••" className="text-muted w-full px-3 py-2 border bg-amber-100 border-amber-50 rounded-md shadow-sm sm:text-sm" />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="expiration-date" className="block text-sm font-medium text-muted mb-1">Expiration date (MM/YY)</label>
-                    <input type="text" id="expiration-date" placeholder="MM/YY" className="w-full px-3 py-2 border bg-amber-100 border-amber-50 rounded-md shadow-sm sm:text-sm" />
+                    <label htmlFor="expiration-date" className="block text-sm font-medium text-primary mb-1">Expiration date (MM/YY)</label>
+                    <input type="text" id="expiration-date" placeholder="MM/YY" className="text-muted w-full px-3 py-2 border bg-amber-100 border-amber-50 rounded-md shadow-sm sm:text-sm" />
                   </div>
                   <div>
-                    <label htmlFor="cvc" className="block text-sm font-medium text-muted mb-1">CVC</label>
-                    <input type="text" id="cvc" placeholder="CVC" className="w-full px-3 py-2 border bg-amber-100 border-amber-50 rounded-md shadow-sm sm:text-sm" />
+                    <label htmlFor="cvc" className="block text-sm font-medium text-primary mb-1">CVC</label>
+                    <input type="text" id="cvc" placeholder="CVC" className="text-muted w-full px-3 py-2 border bg-amber-100 border-amber-50 rounded-md shadow-sm sm:text-sm" />
                   </div>
                 </div>
               </div>
@@ -161,13 +163,13 @@ export default function CheckoutPage({initialList}:InfoList) {
               {/* Order summary */}
           <div className="lg:col-span-5">
             <div className="bg-amber-200 p-6 rounded-lg shadow-sm border-6 border-amber-50 sticky top-8 hover:shadow-2xl ease-in-out duration-700">
-              <h2 className="text-lg font-medium text-primary mb-6">Order summary</h2>
+              <h2 className="text-lg font-medium text-fg-primary mb-6">Order summary</h2>
               
               <ul className="divide-y divide-amber-50 mb-6">
                 {items.map((item) => (
                   <li key={item.id} className="flex py-4">
                     <div className="flex-auto">
-                      <h3 className="text-sm font-medium text-muted">{item.title}</h3>
+                      <h3 className="text-sm font-medium text-primary">{item.title}</h3>
                       <p className="text-sm text-muted">Quantities {item.quantity}</p>
                     </div>
                     <p className="text-sm  font-medium text-muted">{formatPrice(getTotalPrice())}</p>
@@ -177,7 +179,7 @@ export default function CheckoutPage({initialList}:InfoList) {
   
               <div className="space-y-4 pt-4 border-t border-amber-50 text-sm text-muted">
                 <div className="flex justify-between">
-                  <span>Subtotal</span>
+                  <span className='text-primary'>Subtotal</span>
                   <span className="font-medium text-muted">{formatPrice(getTotalPrice())}</span>
                 </div>
                 <div className="flex justify-between">
@@ -186,7 +188,7 @@ export default function CheckoutPage({initialList}:InfoList) {
                 </div>
                 <div className="flex justify-between text-base font-semibold text-primary pt-4 border-t border-amber-50">
                   <span>Total</span>
-                  <span>{formatPrice(FinalPrice)}</span>
+                  <span className='text-muted'>{formatPrice(FinalPrice)}</span>
                 </div>
               </div>
 

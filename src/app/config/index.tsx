@@ -17,7 +17,7 @@ export const productPlaceHolders = [
     {
       Name: 'Cheesecakes',
       Image: <Image alt="Cheesecake" src='/ProductFeatures/Cheesecakes.png' width={120} height={120}/>,
-      Link: <Link href='/Products/Cheesecake'></Link>,
+      Link: '/Products/Cheesecake',
       Description: 'Fluffy cheesecakes that will melt your heart. Baked or No-baked? We have it all.'
     },
     {

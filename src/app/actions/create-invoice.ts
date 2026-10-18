@@ -1,4 +1,5 @@
 'use server'
+import { redirect } from 'next/navigation';
 import clientPromise from '../../../lib/mongodb'
 import { InvoiceFormState, InvoiceSchema } from '../lib/definitions';
 import { verifySession } from '../lib/verifysession';
@@ -68,7 +69,7 @@ export async function CreateInvoice(
     });
 
     return { status: 'success', message: 'Invoice created!' };
-
+    
   } catch (error) {
     console.error("Database Error:", error); // Helpful for local debugging
     return { status: 'error', message: 'A server error occurred. Please come back later.' };

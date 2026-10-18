@@ -1,8 +1,5 @@
-// app/actions.ts
 'use server';
 import {z} from 'zod'
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
 import {UpdateProductFormState, UpdateProductSchema} from '../lib/definitions'
 import clientPromise from '../../../lib/mongodb'
 import { verifySession } from '../lib/verifysession';
@@ -49,7 +46,7 @@ export async function productUpdate(state:UpdateProductFormState, formData: Form
 
   const blob = await put(newFileName, file, {access: 'public'})
   const productImage = blob.url
-  
+
   const client = await clientPromise;
   const db = client.db('thebreadco');
    

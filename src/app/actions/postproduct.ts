@@ -1,4 +1,3 @@
-// app/actions.ts
 'use server';
 import {z} from 'zod'
 import {PostProductFormState, PostProductSchema} from '../lib/definitions'
