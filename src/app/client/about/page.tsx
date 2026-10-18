@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import * as React from "react"
 import Autoplay from "embla-carousel-autoplay"
 import { Card, CardContent } from "../../components/ui/card"

@@ -63,6 +63,7 @@ export async function productUpload(state:PostProductFormState, formData: FormDa
    await writeFile(filePath, buffer);
 
     const productImage = `/ProductImages/${newFileName}`
+
     await db.collection('Products').updateOne(
     { productName: productName },
     {

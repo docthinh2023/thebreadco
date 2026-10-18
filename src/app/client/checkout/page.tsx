@@ -3,9 +3,10 @@
 import MaxWidthWrapper from '../../components/maxwidthwrapper';
 import {useCartStore} from '../../actions/usecart'
 import {formatPrice} from '../../lib/utils';
-import {useEffect, useState} from 'react'
+import {Fragment, useActionState, useEffect, useState} from 'react'
 import { toast } from 'react-toastify';
-import { redirect } from 'next/navigation';
+import {InvoiceFormState} from '@/app/lib/definitions'
+import { CreateInvoice } from '@/app/actions/create-invoice';
 
 interface List {
   userName: Name;
@@ -24,16 +25,38 @@ interface InfoList {
 
 
 
+
+
+const initialState: InvoiceFormState = {
+  status: 'loading'
+}
+
+
+
+
+
+
 export default function CheckoutPage({initialList}:InfoList) {
      const [userInfo, setUserInfo] = useState<List> (initialList)
      const { items, getTotalPrice, clearCart, getTotalItems} = useCartStore();
      const ShippingFee = 50;
      const FinalPrice = ShippingFee + getTotalPrice()
      const totalAmount = FinalPrice
-     const userItems = items
      const totalItems = +getTotalItems()
-     const [isSuccess, setIsSuccess] = useState<boolean>(false)
      const [pressed, setPressed] = useState(true)
+     const [state, action, pending] = useActionState(CreateInvoice, initialState)
+
+       useEffect(() => {
+    if(!state) return;
+      if (state.status === 'success' && state.message) {
+        toast.success(state.message);
+        clearCart()
+      } else if (state.status === 'error' && state.message) {
+        toast.error(state.message);
+      }
+    }, [state]);
+
+
 
       const handleUseNewAddress= () => {
         setPressed(true)
@@ -44,40 +67,11 @@ export default function CheckoutPage({initialList}:InfoList) {
       }
      
 
-       useEffect(() => {
-       const timeout = setTimeout(() => {
-      setIsSuccess(false)
-       }, 700)
 
-       return () => clearTimeout(timeout)
-       }, [isSuccess])
-        
-      
-        const handleSubmit = async () => {
-        const request = fetch ('api/invoice', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({totalAmount: totalAmount, userItems: userItems, totalItems: totalItems})
-        }).then((response) => {
-          if(!response.ok) throw new Error ('Checkout Failed');
-          const data = response.json()
-          clearCart()
-          return data        
-        })
-          
-       
-        toast.promise(request, {
-          pending: 'Verifying data...',
-          success: 'Checkout success!',
-          error: 'Checkout failed. Something went wrong.'
-        })
-
-        redirect('/Profile/Invoice')
-     }
 
   return (
     <MaxWidthWrapper>
-    <div className="min-h-screen  bg-amber-100 py-12 px-4 sm:px-6 lg:px-8">
+    <form action={action} className="min-h-screen  bg-amber-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
       
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-10">
@@ -180,8 +174,7 @@ export default function CheckoutPage({initialList}:InfoList) {
                   </li>
                 ))}
               </ul>
-
-
+  
               <div className="space-y-4 pt-4 border-t border-amber-50 text-sm text-muted">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
@@ -197,16 +190,33 @@ export default function CheckoutPage({initialList}:InfoList) {
                 </div>
               </div>
 
+              
+                <input type='hidden' name='totalItems' value={totalItems}></input>
+                <input type='hidden' name='totalAmount' value={totalAmount}></input>
+                <input type='hidden' name='userItems' value={JSON.stringify(items)}></input>
+               
+               
+               {items.map((item,index)=> (                 
+                 <Fragment key={index}>
+                  <input type='hidden' name='id' value={item.id}></input>
+                  <input type='hidden' name='title' value={item.title}></input>
+                  <input type='hidden' name='price' value={item.price}></input>
+                  <input type='hidden' name='quantity' value={item.quantity}></input>
+                </Fragment>
+                ))}
+           
+            
+             
 
-              <button onClick={() => {handleSubmit(), setIsSuccess(true)}} className="w-full cursor-pointer mt-6 bg-primary hover:bg-fg-primary text-bg-secondary font-medium py-3 px-4 rounded-2xl shadow-sm ease-in-out duration-700 focus:outline-none focus:ring-2 focus:ring-offset-2">
-                {isSuccess? 'Check out confirmed!' : 'Check out'}
+              <button type='submit' disabled={pending} className="w-full cursor-pointer mt-6 bg-primary hover:bg-fg-primary text-bg-secondary font-medium py-3 px-4 rounded-2xl shadow-sm ease-in-out duration-700 focus:outline-none focus:ring-2 focus:ring-offset-2">
+                {pending? 'Checkout Confirmed!' : 'Check out'}
               </button>
             </div>
           </div>
 
         </div>
       </div>
-    </div>
+    </form>
      </MaxWidthWrapper>
   )
 

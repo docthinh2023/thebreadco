@@ -107,6 +107,31 @@ export const PasswordSchema = z.object({
    .trim(),
 })
 
+
+export const InvoiceSchema = z.object({
+  userItems: z.array(z.object({
+    id: z.string(),
+    title: z.string().min(1, "Title is required"),
+    price: z.number().min(20000, "Price must be greater than 20000"),
+    quantity: z.number().int().min(1, "Quantity must be at least 1"),
+  })),
+  totalAmount: z.number(),
+  totalItems: z.number(),
+});
+
+export type InvoiceFormState = {
+  error?: {
+    userItems?: string[]; 
+    totalAmount?: string[];
+    totalItems?: string[];
+  };
+  message?: string;
+  status:'loading' | 'success' | 'error';
+};
+
+
+
+
 export type SignUpFormState =
   | {
       error?: {
@@ -119,6 +144,7 @@ export type SignUpFormState =
       status: 'loading'|'success'|'error'
     }
   | undefined
+
 
 export type LoginFormState =
   | {

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import GetUserInfo from '../client/info/page';
+import UpdateInfo from '../client/info/page';
 import { verifySession } from '../lib/verifysession';
 import clientPromise from '../../../lib/mongodb';
 import { ObjectId } from 'mongodb';
@@ -63,7 +63,7 @@ export default async function Profile() {
          <main className="py-10 px-3 md:py-8 md:pl-0 md:mb-15 lg:mb-20 xl:py-15 gap-3 flex flex-col md:flex-row min-h-screen min-w-screen overflow-x-hidden">
             <div className='md:ml-35 flex flex-col min-w-screen self-center pb-3'>
               <div className='min-w-sm max-w-xl self-center md:mr-20 xl:mr-35'>
-                <GetUserInfo initialList={userList}/>
+                <UpdateInfo initialList={userList}/>
                </div>
             </div>
          </main>
