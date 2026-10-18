@@ -64,8 +64,7 @@ function SheetContent({
             data-slot="sheet-close"
             render={
               <Button
-                variant="ghost"
-                className="absolute top-3 right-3 hover:text-red-700"
+                className="absolute top-3 right-3 hover:text-bg-secondary hover:bg-fg-primary text-primary bg-amber-50"
                 size='icon'
                 
               />

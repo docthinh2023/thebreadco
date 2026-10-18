@@ -5,6 +5,7 @@ import { ObjectId } from 'mongodb';
 import CheckoutPage from '../client/checkout/page'
 import CheckOutPageSkeleton from '../client/checkoutpageskeleton/page'
 
+
 async function GetInfo() {
     const session = await verifySession()
     const userId = session?.userId
@@ -26,12 +27,16 @@ async function GetInfo() {
 
 
 export default async function CheckOut () {
+
     const userInfo = await GetInfo()
     if(!userInfo)
     {return(
+  
         <CheckOutPageSkeleton></CheckOutPageSkeleton>
     )}
     return (
+       
               <CheckoutPage initialList={userInfo}></CheckoutPage>
+        
     )
 }

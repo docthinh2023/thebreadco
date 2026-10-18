@@ -6,6 +6,7 @@ import clientPromise from '../../../../lib/mongodb'
 import InvoicePage from '../../client/invoice/page'
 import UpdateProductForm from '../../components/ui/update-productform'
 import PostProductForm from '../../components/ui/post-productform';
+import { redirect } from 'next/navigation';
 
 
 const Links = [
@@ -108,8 +109,7 @@ export default async function ProfileActions({params,} : {params: Promise<{slug:
                 <PostProductForm></PostProductForm>
                </div>
             </div>
-         </main>
-         }
+         </main>}
        </MaxWidthWrapper>
     )
 }

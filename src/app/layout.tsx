@@ -6,6 +6,7 @@ import Footer from "./components/ui/footer";
 import "./globals.css";
 import { Suspense } from "react";
 import  ToastProvider  from  "../app/components/ui/toastcontainer";
+import NotificationHandler from "./components/ui/toast";
 
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={cn("h-dvh", "antialiased", momoRegular.className, "font-sans", geist.variable)}>
         <body className={cn(`h-full, ${momoRegular.className}, antialiased, pointer-events-auto bg-amber-100 flex flex-col`)}>
         <ToastProvider>
+        <NotificationHandler/>
         <Navbar></Navbar>
         <main className="flex-1 h-dvh">{children}</main>
         <Suspense fallback={null}>
