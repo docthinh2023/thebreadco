@@ -62,7 +62,16 @@ export default function SignupForm() {
         <li className='text-primary/70'>Minimum 8 characters</li>
         </div>
       </div>
-      {state?.error?.userPassword && <p className='text-fg-primary'>{state.error.userPassword}</p>}
+       {state?.error?.userPassword && (
+        <div>
+          <p>Password must:</p>
+          <ul>
+            {state.error.userPassword.map((error) => (
+              <li key={error}>- {error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <Link href='/sign-in' className='underline text-muted text-xs md:text-xl mt-4 self-center'>Sign-in with an account</Link>
       <button className='cursor-pointer text-xs md:text-xl rounded-2xl bg-primary py-2 text-bg-secondary mt-4 hover:bg-fg-primary ease-in-out duration-700' disabled={pending} type="submit">
         {pending? 'Creating...' : 'Create Account'}
