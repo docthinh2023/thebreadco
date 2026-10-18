@@ -128,10 +128,10 @@ export default function CheckoutPage({initialList}:InfoList) {
                   </div>
                 </>}
                  <div className='mt-4'>
-                  <button onClick={handleUseCurrentAddress} className='w-full px-3 py-2  rounded-2xl shadow-sm bg-primary text-bg-secondary hover:bg-fg-primary font-medium ease-in-out duration-700 focus:outline-none focus:ring-2 focus:ring-offset-2'>Use Current Address</button>
+                  <button onClick={handleUseCurrentAddress} type='button' className='w-full px-3 py-2  rounded-2xl shadow-sm bg-primary text-bg-secondary hover:bg-fg-primary font-medium ease-in-out duration-700 focus:outline-none focus:ring-2 focus:ring-offset-2'>Use Current Address</button>
                  </div>
                  <div className='mt-4'>
-                  <button onClick={handleUseNewAddress} className='w-full px-3 py-2  rounded-2xl shadow-sm bg-primary text-bg-secondary hover:bg-fg-primary font-medium ease-in-out duration-700 focus:outline-none focus:ring-2 focus:ring-offset-2'>Use New Address</button>
+                  <button onClick={handleUseNewAddress} type='button' className='w-full px-3 py-2  rounded-2xl shadow-sm bg-primary text-bg-secondary hover:bg-fg-primary font-medium ease-in-out duration-700 focus:outline-none focus:ring-2 focus:ring-offset-2'>Use New Address</button>
                  </div>
               </div>
             </section>

@@ -6,6 +6,14 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
+      },
+    ],
+  },
   webpack: (config, { isServer }) => {
     if (!isServer) {
       // Tell webpack to ignore 'child_process' on the client side
@@ -17,6 +25,7 @@ const nextConfig: NextConfig = {
       };
     }
     return config;
+    
   },
 };
 

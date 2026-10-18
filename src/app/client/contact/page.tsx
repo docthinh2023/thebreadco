@@ -2,8 +2,17 @@
 import { AiFillClockCircle, AiFillEnvironment, AiFillMessage, AiFillPhone, } from "react-icons/ai";
 import MaxWidthWrapper from "../../components/maxwidthwrapper";
 import Image from 'next/image'
+import { toast } from "react-toastify";
+import { ReactEventHandler, useState } from "react";
 
 export default function ContactsPage () {
+   const [Empty, setEmpty] = useState('')
+   
+   const handleClick=()=>{
+    toast.success('Subcribed to news letter!')
+       setEmpty('')
+
+   }
 
     return (
         <MaxWidthWrapper>
@@ -42,25 +51,25 @@ export default function ContactsPage () {
           <section className="justify-center items-center grid grid-cols-1 bg-amber-200 p-6 gap-3 w-full xl:max-w-xl rounded-xl shadow-sm border-6 border-amber-50 hover:shadow-2xl ease-in-out duration-700">
            <div className="flex flex-col gap-10">
            <h1 className="text-center text-sm md:text-xl">Leave us a message!</h1>
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 content-center">
+           <form className="grid grid-cols-1 md:grid-cols-2 gap-3 content-center">
             <div className="">
                 <label htmlFor="name" className="block text-sm font-medium text-muted mb-1">Name</label>
-                <input type="text" id="name" className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
+                <input  value={Empty} type="text" id="name" className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
             </div>
               <div className="">
                 <label htmlFor="email" className="block text-sm font-medium text-muted mb-1">Email</label>
-                <input type="text" id="email" className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
+                <input value={Empty} type="text" id="email" className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
             </div>
             <div className="">
                 <label htmlFor="phone" className="block text-sm font-medium text-muted mb-1">Phone</label>
-                <input type="text" id="phone" className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
+                <input  value={Empty} type="text" id="phone" className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
             </div>
             <div className="md:col-span-2">
                 <label htmlFor="address" className="block text-sm font-medium text-muted mb-1">Message</label>
-                <input type="text" id="address" className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
+                <input  value={Empty} type="text" id="address" className="w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
             </div>
-            <button type="submit" className="text-bg-secondary cursor-pointer hover:bg-fg-primary duration-700 ease-in-out bg-primary rounded-2xl text-sm md:text-xl block h-10 mt-3 md:col-span-2">Send Message</button>
-           </div>
+            <button type="button" onClick={handleClick} className="text-bg-secondary cursor-pointer hover:bg-fg-primary duration-700 ease-in-out bg-primary rounded-2xl text-sm md:text-xl block h-10 mt-3 md:col-span-2">Send Message</button>
+           </form>
            </div>
           </section>
           <div className="flex p-4 gap-4 w-auto h-auto border-6 border-amber-50 bg-amber-200 rounded-xl object-cover shadow-sm flex-col hover:shadow-2xl ease-in-out duration-500">

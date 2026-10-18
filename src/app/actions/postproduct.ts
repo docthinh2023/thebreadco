@@ -1,11 +1,10 @@
 // app/actions.ts
 'use server';
 import {z} from 'zod'
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
 import {PostProductFormState, PostProductSchema} from '../lib/definitions'
 import clientPromise from '../../../lib/mongodb'
 import { verifySession } from '../lib/verifysession';
+import {put} from '@vercel/blob'
 
 
 export async function productUpload(state:PostProductFormState, formData: FormData): Promise<PostProductFormState> {
@@ -35,34 +34,24 @@ export async function productUpload(state:PostProductFormState, formData: FormDa
   const userId = session?.userId
 
   if(userId){
-       // handle image upload 
+      
   const file = formData.get('image') as File;
 
   if (!file) {
     throw new Error('No file uploaded');
   }
 
-  // Read file data into a Buffer
-  const bytes = await file.arrayBuffer();
-  const buffer = Buffer.from(bytes);
-
   // Change the image name here
   const fileExtension = file.name.split('.').pop();
   const newFileName = `${productName}.${fileExtension}`;
-
-  // Define the local storage path (e.g., inside public/uploads)
-  const uploadDir = join(process.cwd(), 'public', 'ProductImages');
-  const filePath = join(uploadDir, newFileName);
+  
+  const blob = await put(newFileName, file, {access: 'public'})
+  
 
   const client = await clientPromise;
   const db = client.db('thebreadco');
    
-    // Ensure the directory exists
-   await mkdir(uploadDir, { recursive: true });
-    // Save the file to the local directory
-   await writeFile(filePath, buffer);
-
-    const productImage = `/ProductImages/${newFileName}`
+  const productImage = blob.url
 
     await db.collection('Products').updateOne(
     { productName: productName },
