@@ -6,7 +6,8 @@ export async function proxy(request: NextRequest) {
   const session = await verifySession(); 
   const isAuthenticated = session?.userId
   const isAdmin = session?.role==='admin'
-  const protectedPaths = ['/Profile', '/Checkout', '/client/checkout', '/client/profile']  
+  const protectedPaths = ['/Profile', '/Checkout', '/client/checkout', '/client/profile']
+  const AdminPaths = ['/Profile/AddProduct', '/Profile/UpdateProduct']  
   const {pathname} =  request.nextUrl
   const isProtected = protectedPaths.some((path) =>
   pathname.startsWith(path)
@@ -16,12 +17,6 @@ export async function proxy(request: NextRequest) {
     const loginUrl = new URL('/sign-in', request.url)
     loginUrl.searchParams.set('error', 'unauthenticated')
     return NextResponse.redirect(loginUrl)
-  }
-
-  if (request.nextUrl.pathname==='/Profile/Change Product' && !isAdmin) {
-    const homeUrl = new URL('/', request.url)
-    homeUrl.searchParams.set('error', 'unauthorized')
-    return NextResponse.redirect(homeUrl)
   }
 
   return NextResponse.next()
