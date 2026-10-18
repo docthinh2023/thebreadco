@@ -6,7 +6,7 @@ import { join } from 'path';
 import {UpdateProductFormState, UpdateProductSchema} from '../lib/definitions'
 import clientPromise from '../../../lib/mongodb'
 import { verifySession } from '../lib/verifysession';
-
+import {put} from '@vercel/blob'
 
 export async function productUpdate(state:UpdateProductFormState, formData: FormData): Promise<UpdateProductFormState> {
   
@@ -42,27 +42,20 @@ export async function productUpdate(state:UpdateProductFormState, formData: Form
     throw new Error('No file uploaded');
   }
 
-  // Read file data into a Buffer
-  const bytes = await file.arrayBuffer();
-  const buffer = Buffer.from(bytes);
 
   // Change the image name here
   const fileExtension = file.name.split('.').pop();
   const newFileName = `${productName}.${fileExtension}`;
 
-  // Define the local storage path (e.g., inside public/uploads)
-  const uploadDir = join(process.cwd(), 'public', 'ProductImages');
-  const filePath = join(uploadDir, newFileName);
-
+  const blob = await put(newFileName, file, {access: 'public'})
+  const productImage = blob.url
+  
   const client = await clientPromise;
   const db = client.db('thebreadco');
    
-    // Ensure the directory exists
-   await mkdir(uploadDir, { recursive: true });
-    // Save the file to the local directory
-   await writeFile(filePath, buffer);
+  
 
-    const productImage = `/ProductImages/${newFileName}`
+    
     await db.collection('Products').updateOne(
     { productName: productName },
     {

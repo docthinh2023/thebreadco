@@ -41,7 +41,7 @@ export async function productUpload(state:PostProductFormState, formData: FormDa
     throw new Error('No file uploaded');
   }
 
-  // Change the image name here
+  
   const fileExtension = file.name.split('.').pop();
   const newFileName = `${productName}.${fileExtension}`;
   
