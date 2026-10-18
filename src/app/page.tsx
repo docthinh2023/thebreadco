@@ -19,7 +19,7 @@ export default function Home() {
         <div className="absolute object-fill w-full h-1/3 xl:h-4/5 overflow-hidden bg-black/35 -z-1">
         </div>
         <video autoPlay loop muted playsInline className="absolute object-fill self-center -z-2 h-1/3 xl:h-4/5 w-full overflow-hidden">
-          <source src="/HomeVideo/homevideo.mp4" type="video/mp4"/>
+          <source src='https://x8iphmfczyw26zmo.public.blob.vercel-storage.com/HomeVideo.mp4'/>
         </video>
         <div className="py-2 flex flex-col justify-center-safe mb-10 lg:mb-20 xl:mb-60 text-center md:gap-8">
           <h1 className="text-3xl md:text-5xl xl:text-7xl text-bg-primary">The<span className={`${agbalumoRegular.className} text-4xl md:text-6xl xl:text-8xl`}>Bread</span>Co</h1>
