@@ -7,7 +7,7 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/app/components/ui/carousel"
+} from "../../../app/components/ui/carousel"
 import MaxWidthWrapper from "../../components/maxwidthwrapper";
 import {Agbalumo} from "next/font/google";
 import Image from 'next/image'
@@ -32,40 +32,40 @@ const Images = [
 
 const Partners = [
     {
-         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner1.png' width={80} height={80}/>,
+         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner1.png' width={100} height={80}/>,
     },
     {
-         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner2.png' width={80} height={80}/>,
+         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner2.png' width={100} height={80}/>,
     },
     {
-         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner3.png' width={80} height={80}/>,
+         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner3.png' width={100} height={80}/>,
     },
     {
-         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner4.png' width={80} height={80}/>,
+         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner4.png' width={100} height={80}/>,
     },
     {
-         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner5.png' width={80} height={80}/>,
+         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner5.png' width={100} height={80}/>,
     },
         {
-         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner6.png' width={80} height={80}/>,
+         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner6.png' width={100} height={80}/>,
     },
     {
-         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner7.png' width={80} height={80}/>,
+         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner7.png' width={100} height={80}/>,
     },
     {
-         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner8.png' width={80} height={80}/>,
+         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner8.png' width={100} height={80}/>,
     },
     {
-         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner9.png' width={80} height={80}/>,
+         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner9.png' width={100} height={80}/>,
     },
     {
-         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner10.png' width={80} height={80}/>,
+         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner10.png' width={100} height={80}/>,
     },
        {
-         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner11.png' width={80} height={80}/>,
+         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner11.png' width={100} height={80}/>,
     },
     {
-         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner12.png' width={80} height={80}/>,
+         Image: <Image alt='Cookies' loading='eager' src='/AboutImages/Partner12.png' width={100} height={80}/>,
     },
 ]
 

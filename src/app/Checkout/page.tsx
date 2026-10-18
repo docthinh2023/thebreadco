@@ -4,6 +4,7 @@ import clientPromise from '../../../lib/mongodb';
 import { ObjectId } from 'mongodb';
 import CheckoutPage from '../client/checkout/page'
 import CheckOutPageSkeleton from '../client/checkoutpageskeleton/page'
+import {Suspense} from 'react'
 
 
 async function GetInfo() {
@@ -31,12 +32,13 @@ export default async function CheckOut () {
     const userInfo = await GetInfo()
     if(!userInfo)
     {return(
-  
+        <Suspense fallback={<div>loading....</div>}>
         <CheckOutPageSkeleton></CheckOutPageSkeleton>
+        </Suspense>
     )}
     return (
-       
+              <Suspense fallback={<div>loading....</div>}>
               <CheckoutPage initialList={userInfo}></CheckoutPage>
-        
+              </Suspense>
     )
 }

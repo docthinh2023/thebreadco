@@ -28,8 +28,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={cn("h-dvh", "antialiased", momoRegular.className, "font-sans", geist.variable)}>
         <body className={cn(`h-full, ${momoRegular.className}, antialiased, pointer-events-auto bg-amber-100 flex flex-col`)}>
         <ToastProvider>
-        <NotificationHandler/>
         <Navbar></Navbar>
+        <NotificationHandler/>
         <main className="flex-1 h-dvh">{children}</main>
         <Suspense fallback={null}>
         </Suspense>
