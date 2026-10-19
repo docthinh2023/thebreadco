@@ -7,7 +7,7 @@ import {put} from '@vercel/blob'
 
 export async function productUpdate(state:UpdateProductFormState, formData: FormData): Promise<UpdateProductFormState> {
   
-  // handle input files  
+  
   const validatedFields = UpdateProductSchema.safeParse({
      productName: formData.get('productName'),
      productCategory: formData.get('productCategory'),
@@ -32,7 +32,7 @@ export async function productUpdate(state:UpdateProductFormState, formData: Form
   const userId = session?.userId
 
   if(userId){
-      // handle image upload 
+      
   const file = formData.get('image') as File;
 
   if (!file) {
@@ -40,11 +40,11 @@ export async function productUpdate(state:UpdateProductFormState, formData: Form
   }
 
 
-  // Change the image name here
+  
   const fileExtension = file.name.split('.').pop();
   const newFileName = `${productName}.${fileExtension}`;
 
-  const blob = await put(newFileName, file, {access: 'public'})
+  const blob = await put(newFileName, file, {access: 'public', allowOverwrite: true})
   const productImage = blob.url
 
   const client = await clientPromise;
