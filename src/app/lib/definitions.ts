@@ -119,10 +119,10 @@ export const InvoiceSchema = z.object({
 });
 
 export const NewsLetterSchema = z.object({
-  userEmail: z.email(),
+  userEmail: z.email().trim(),
   userName: z.string(),
   userPhone: z.string(),
-  userMessage: z.string(),
+  userMessage: z.string().optional(),
 })
 
 export type NewsLetterFormState = |{

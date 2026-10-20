@@ -23,11 +23,10 @@ export async function CreateInvoice(
     quantity: Number(quantities[index]),
   }));
 
-  // 3. Pass the constructed array to Zod
   const validatedFields = InvoiceSchema.safeParse({
     totalAmount: Number(formData.get('totalAmount')),
     totalItems: Number(formData.get('totalItems')),
-    userItems: submitedItems // This is now a clean array of objects
+    userItems: submitedItems 
   });
 
 
@@ -53,12 +52,12 @@ export async function CreateInvoice(
     const client = await clientPromise;
     const db = client.db('thebreadco');
     
-    // Safety check for empty checkout
+   
     if (!totalItems || totalItems === 0) {
       return { status: 'error', message: 'You cannot check out with 0 items.' };
     }
 
-    // 3. Database Insertion
+  
     await db.collection('Invoice').insertOne({
       userId: userId,
       totalAmount: totalAmount,
@@ -71,7 +70,6 @@ export async function CreateInvoice(
     return { status: 'success', message: 'Invoice created!' };
     
   } catch (error) {
-    console.error("Database Error:", error); // Helpful for local debugging
     return { status: 'error', message: 'A server error occurred. Please come back later.' };
   }
 }

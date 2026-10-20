@@ -6,7 +6,7 @@ import {put} from '@vercel/blob'
 
 export async function SubscribeNews(state:NewsLetterFormState, formData: FormData): Promise<NewsLetterFormState> {
   
-  // handle input files  
+  
   const validatedFields = NewsLetterSchema.safeParse({
      userName: formData.get('userName'),
      userEmail: formData.get('userEmail'),

@@ -26,7 +26,7 @@ export default function ContactsPage () {
 
     return (
         <MaxWidthWrapper>
-        <form action={action} className="grid grid-cols-1 md:grid-cols-1 p-10 md:p-14 justify-items-center content-center gap-1 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-1 p-10 md:p-14 justify-items-center content-center gap-1 md:gap-8">
           <section className="grid grid-cols-2  xl:grid-cols-4 p-5 min-w-100 gap-3 md:p-2 md:gap-10  justify-items-center content-center mt-10 md:mt-15">
              <div className="flex flex-col justify-center items-center gap-1 md:gap-4 w-45 h-28 md:w-xs md:h-50 bg-amber-200 border-6 border-amber-50 rounded-xl shadow-sm hover:shadow-2xl ease-in-out duration-500">
                 <div className="bg-amber-50 w-8 h-8 md:w-10 md:h-10 rounded-full shadow-sm text-primary items-center justify-center flex">
@@ -61,22 +61,22 @@ export default function ContactsPage () {
           <section className="justify-center items-center grid grid-cols-1 bg-amber-200 p-6 gap-3 w-full xl:max-w-xl rounded-xl shadow-sm border-6 border-amber-50 hover:shadow-2xl ease-in-out duration-700">
            <div className="flex flex-col gap-10">
            <h1 className="text-center text-sm md:text-xl text-fg-primary">Leave us a message!</h1>
-           <form className="grid grid-cols-1 md:grid-cols-2 gap-3 content-center">
+           <form action={action} className="grid grid-cols-1 md:grid-cols-2 gap-3 content-center">
             <div className="">
                 <label htmlFor="name" className="block text-sm font-medium text-primary mb-1">Name</label>
-                <input  type="text" id="name" className="text-muted w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
+                <input  type="text" name="userName" className="text-muted w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
             </div>
               <div className="">
                 <label htmlFor="email" className="block text-sm font-medium text-primary mb-1">Email</label>
-                <input type="text" id="email" className="text-muted w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
+                <input type="text" name="userEmail" className="text-muted w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
             </div>
             <div className="">
                 <label htmlFor="phone" className="block text-sm font-medium text-primary mb-1">Phone</label>
-                <input type="text" id="phone" className="text-muted w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
+                <input type="text" name="userPhone" className="text-muted w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
             </div>
             <div className="md:col-span-2">
                 <label htmlFor="address" className="block text-sm font-medium text-primary mb-1">Message</label>
-                <input type="text" id="address" className="text-muted w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
+                <input type="text" name="userMessage" className="text-muted w-full px-3 py-2 rounded-md border bg-amber-100 border-amber-50 shadow-sm text-sm" />
             </div>
             <button type="submit" disabled={pending} className="text-bg-secondary cursor-pointer hover:bg-fg-primary duration-700 ease-in-out bg-primary rounded-2xl text-sm md:text-xl block h-10 mt-3 md:col-span-2">
                 {pending? 'Subscribed!' : 'Subscribe News.'}
@@ -91,7 +91,7 @@ export default function ContactsPage () {
             </div>
           </div>
          </div>
-        </form>
+        </div>
         </MaxWidthWrapper>
 
     )
